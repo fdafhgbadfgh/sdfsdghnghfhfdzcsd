@@ -21,7 +21,7 @@ do
         return year .. "-" .. format(mon, 2) .. "-" .. format(day, 2) .. "T" .. format(hour, 2) .. ":" .. format(min, 2) .. ":" .. format(sec, 2) .. "Z"
     end
 
-    local skidA = {
+    local skid = {
         webhookJson = function(self, scriptName)
 
             if not self then return end
