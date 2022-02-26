@@ -126,7 +126,7 @@ do
     -- skid:sendWebhook('', 'Test1')
     -- skid:sendWebhookGame('', 'test 1')
 
-    return skidApi
+    return skid
 end
 
 
